@@ -19,25 +19,36 @@ class MyProfile extends React.Component{
         })
     }
 
-    componentDidMount() {
-       axios.get(this.SERVER_URL + "get-user-by-token?token="+ this.props.token)
-           .then(response => {
-               if (response.data.success){
-                   this.changeValueByKey("user",response.data.user);
-               }
-           })
 
+    getFromServer = (path,key)=>{
+        axios.get(path)
+            .then(response => {
+                if (response.data.success){
+                    switch (key){
+                        case "user":
+                            this.changeValueByKey("user",response.data.user);break;
+
+                        case "allPosts":
+                            this.changeValueByKey("allPosts",response.data.list);break;
+                    }
+
+                }
+            })
+    }
+    componentDidMount() {
+        this.getUser();
          this.getAllUserPosts();
     }
 
-    getAllUserPosts =() =>{
-        axios.get(this.SERVER_URL + "get-user-all-posts?token="+ this.props.token)
-            .then(response => {
-                if (response.data.success){
-                    this.changeValueByKey("allPosts",response.data.posts);
-                }
-            })
+    getUser = () => {
+        this.getFromServer(this.SERVER_URL + "get-user-by-token?token="+ this.props.token,
+            "user");
+    }
 
+    getAllUserPosts =() =>{
+
+        this.getFromServer(this.SERVER_URL + "get-user-all-posts?token="+ this.props.token,
+            "allPosts");
     }
     render() {
         return(

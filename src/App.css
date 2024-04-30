@@ -20,3 +20,32 @@
   border: 2px solid #F27BBD;
   font-weight: bold;
 }
+
+.image-window {
+  width: 150px; /* קוטר החלון */
+  height: 150px;
+  border-radius: 50%; /* צורת עיגול */
+  overflow: hidden; /* למניעת חיתוך של התמונה */
+  border: 2px solid #ccc; /* עיצוב של הגבול */
+  margin-bottom: 20px; /* רווח בין התמונה לתיבת הקלט */
+}
+
+
+.image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover ;
+}
+
+.left {
+  display: flex;  /* הגדרת Flexbox */
+  text-align: left;
+  justify-content: flex-start;  /* אובייקטים יצמדו לשמאל */
+
+}
+.right {
+  display: flex;  /* הגדרת Flexbox */
+  text-align: right;
+  justify-content: flex-end;
+
+}
